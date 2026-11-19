@@ -52,6 +52,7 @@ https://<用户名>.github.io/<仓库名>/
 注意：
 - 仓库名建议用英文（如 `tcm-fangji-flashcards`），URL 更干净；页面内部路径是相对的，放在子目录 `/仓库名/` 下也能正常工作。
 - `formulas.js` 必须一起提交，否则页面读不到数据。
+- 更新 `formulas.js`、`app.js` 或 `style.css` 后，请把 `index.html` 引用地址末尾的 `?v=...` 改成一个新值，避免浏览器和 GitHub Pages 继续使用缓存中的旧文件。
 - 私有仓库发布 Pages 通常需要付费计划（Pro/Team 及以上），公开仓库免费。
 - 已包含 `.nojekyll`，跳过 Jekyll 构建，部署更快且不会被误处理。
 

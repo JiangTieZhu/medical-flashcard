@@ -66,7 +66,7 @@
     if (text) {
       text.split('；').forEach(function (line) {
         var s = document.createElement('span');
-        s.textContent = line;
+        s.textContent = line.replace(/[。．.]+$/, '').trim();
         box.appendChild(s);
       });
     }
