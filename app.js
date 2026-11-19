@@ -228,7 +228,8 @@
   }
 
   card.addEventListener('click', function (e) {
-    if (e.target.closest('.back')) return; // 背面不误触翻回
+    // 正面、背面点击都可翻面；点到按钮/链接等控件时不误翻
+    if (e.target.closest('a, button, input, select, textarea')) return;
     flip();
   });
   $('f-song').addEventListener('click', function (e) {

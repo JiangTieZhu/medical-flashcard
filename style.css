@@ -121,7 +121,7 @@ body{
 .hint{position:absolute;bottom:22px;font-size:12px;color:#a79b88;letter-spacing:.06em}
 
 /* back */
-.back{transform:rotateY(180deg);cursor:default;text-align:left}
+.back{transform:rotateY(180deg);cursor:pointer;text-align:left}
 .back-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
 .back-top h3{margin:0;font-family:"Songti SC","STSong","SimSun",serif;font-size:24px;letter-spacing:.08em}
 .back-top .from{font-size:13px;color:var(--red)}
