@@ -22,6 +22,7 @@
     revealed: false,
     list: [],
     idx: 0,
+    last: '',
     mastered: {}
   };
 
@@ -36,6 +37,7 @@
       state.mode = s.mode || '顺序';
       state.hide = !!s.hide;
       state.mute = !!s.mute;
+      state.last = typeof s.last === 'string' ? s.last : '';
       state.mastered = s.mastered || {};
     } catch (e) { /* 忽略损坏的存储 */ }
   }
@@ -43,7 +45,8 @@
     try {
       localStorage.setItem(KEY, JSON.stringify({
         chapter: state.chapter, level: state.level, mode: state.mode,
-        hide: state.hide, mute: state.mute, mastered: state.mastered
+        hide: state.hide, mute: state.mute, last: state.last,
+        mastered: state.mastered
       }));
     } catch (e) { /* 隐私模式忽略 */ }
   }
@@ -142,6 +145,14 @@
     return a;
   }
 
+  /* 回到上次看到的那张方剂 */
+  function restoreLast() {
+    if (!state.last) return;
+    for (var i = 0; i < state.list.length; i++) {
+      if (state.list[i].name === state.last) { state.idx = i; return; }
+    }
+  }
+
   /* ---------- 渲染 ---------- */
   function cur() { return state.list[state.idx] || null; }
 
@@ -196,6 +207,10 @@
 
     var done = state.list.filter(function (x) { return state.mastered[x.name]; }).length;
     $('mastered').textContent = '本组已掌握 ' + done + ' / ' + state.list.length;
+
+    /* 记住当前卡片，刷新或重新打开浏览器后继续 */
+    state.last = f.name;
+    save();
   }
 
   function renderStats() {
@@ -289,5 +304,6 @@
   $('hide').checked = state.hide;
   $('mute').checked = state.mute;
   rebuild();
+  restoreLast();
   render();
 })();
